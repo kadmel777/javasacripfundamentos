@@ -1,27 +1,52 @@
-const SET_POINT_ALTURA = 1.8
-
-const medirAltura = altura => altura >= SET_POINT_ALTURA
-
-
-class persona {
+class Persona {
     constructor(nombre, apellido, altura) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.altura = altura;
+      this.nombre = nombre
+      this.apellido = apellido
+      this.altura = altura
     }
+  
+    saludar(fn) {
+      var { nombre, apellido } = this
+  
+      console.log(`Hola, me llamo ${nombre} ${apellido}`)
+      if (fn) {
+        fn(nombre, apellido)
+      }
+    }
+  
     soyAlto() {
-        if (this.altura>=SET_POINT_ALTURA) {
-            console.log('Soy una persona alta');
-        }
-        else {
-            console.log('Soy una persona baja');
-        }
+      return this.altura > 1.8
     }
-    saludar() {
-        console.log(`hola, mi nombre es ${this.nombre} ${this.apellido}`);
+  }
+  
+  class Desarrollador extends Persona {
+    constructor(nombre, apellido, altura) {
+      super(nombre, apellido, altura)
     }
-}
-
-
-
-let camilo = new persona ('Camilo', 'Garcia', 1.8)
+  
+    saludar(fn) {
+      // var nombre = this.nombre
+      // var apellido = this.apellido
+      var { nombre, apellido } = this
+  
+      console.log(`Hola, me llamo ${nombre} ${apellido} y soy desarrollador/a`)
+      if (fn) {
+        fn(nombre, apellido, true)
+      }
+    }
+  }
+  
+  function responderSaludo(nombre, apellido, esDev) {
+    console.log(`Buen día ${nombre} ${apellido}`)
+    if (esDev) {
+      console.log(`Ah mirá, no sabía que eras desarrollador/a`)
+    }
+  }
+  
+  var sacha = new Persona('Sacha', 'Lifszyc', 1.72)
+  var erika = new Persona('Erika', 'Luna', 1.65)
+  var arturo = new Desarrollador('Arturo', 'Martinez', 1.89)
+  
+  sacha.saludar()
+  erika.saludar(responderSaludo)
+  arturo.saludar(responderSaludo)
