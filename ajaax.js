@@ -8,4 +8,8 @@ const onResponse = function(luke) {
     console.log(`hola, yo soy ${luke.name}`)
 }
 
-$.get(LUKE_URL,OPT, onResponse)
+$
+    .get(LUKE_URL,OPT, onResponse)
+    .fail(() => {
+        console.log('sucedio un error')
+    })
